@@ -10,42 +10,42 @@ namespace Calculator
             var terms = equation.Split(new Char[] { '*', '=' });
             if (terms[0].Contains('_'))
             {
-                Missingnumberin1stterm(terms);
+                MissingNumberIn1stTerm(terms);
             }
 
             else if (terms[1].Contains('_'))
             {
-                Missingnumberin2ndterm(terms);
+                MissingNumberIn2ndTerm(terms);
             }
 
             else if (terms[2].Contains('_'))
             {
-                Missingnumberin3rdterm(terms);
+                MissingNumberIn3rdTerm(terms);
             }
         }
-        static void Missingnumberin2ndterm(string[] terms)
+        static void MissingNumberIn2ndTerm(string[] terms)
         {
 
             int firstNumber = int.Parse(terms[0]);
-            int thirdnumber = int.Parse(terms[2]);
-            int secondnumber = thirdnumber / firstNumber;
-            Console.WriteLine(secondnumber);
+            int thirdNumber = int.Parse(terms[2]);
+            int secondNumber = thirdNumber / firstNumber;
+            Console.WriteLine(secondNumber);
         }
-        static void Missingnumberin1stterm(string[] terms)
+        static void MissingNumberIn1stTerm(string[] terms)
         {
 
             int secondNumber = int.Parse(terms[1]);
-            int thirdnumber = int.Parse(terms[2]);
-            int firstnumber = thirdnumber / secondNumber;
-            Console.WriteLine(firstnumber);
+            int thirdNumber = int.Parse(terms[2]);
+            int firstNumber = thirdNumber / secondNumber;
+            Console.WriteLine(firstNumber);
         }
-        static void Missingnumberin3rdterm(string[] terms)
+        static void MissingNumberIn3rdTerm(string[] terms)
         {
 
             int secondNumber = int.Parse(terms[1]);
-            int firstnumber = int.Parse(terms[0]);
-            int thirdnumber = firstnumber * secondNumber;
-            Console.WriteLine(thirdnumber);
+            int firstNumber = int.Parse(terms[0]);
+            int thirdNumber = firstNumber * secondNumber;
+            Console.WriteLine(thirdNumber);
         }
     }
 }
