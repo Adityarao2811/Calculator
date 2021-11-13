@@ -6,7 +6,7 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            string equation = "450*10=4_00";
+            string equation = "_50*10=4500";
             var terms = equation.Split(new Char[] { '*', '=' });
             if (terms[0].Contains('_'))
             {
@@ -30,7 +30,15 @@ namespace Calculator
             int thirdNumber = int.Parse(terms[2]);
             int secondNumber = thirdNumber / firstNumber;
             Console.WriteLine(secondNumber);
+            PrintMissingNumber(secondNumber.ToString(), terms[1]);
         }
+
+        private static void PrintMissingNumber(string answer, string term)
+        {
+            int pos = term.IndexOf('_');
+            Console.WriteLine("Missing digit is " + answer[pos]);
+        }
+
         static void MissingNumberIn1stTerm(string[] terms)
         {
 
@@ -38,6 +46,7 @@ namespace Calculator
             int thirdNumber = int.Parse(terms[2]);
             int firstNumber = thirdNumber / secondNumber;
             Console.WriteLine(firstNumber);
+            PrintMissingNumber(firstNumber.ToString(), terms[0]);
         }
         static void MissingNumberIn3rdTerm(string[] terms)
         {
@@ -46,6 +55,7 @@ namespace Calculator
             int firstNumber = int.Parse(terms[0]);
             int thirdNumber = firstNumber * secondNumber;
             Console.WriteLine(thirdNumber);
+            PrintMissingNumber(thirdNumber.ToString(), terms[2]);
         }
     }
 }
