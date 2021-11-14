@@ -7,20 +7,27 @@ namespace Calculator
         static void Main(string[] args)
         {
             string equation = "_51*10=4500";
-            var terms = equation.Split(new Char[] { '*', '=' });
-            if (terms[0].Contains('_'))
+            try
             {
-                MissingNumberIn1stTerm(terms);
-            }
+                var terms = equation.Split(new Char[] { '*', '=' });
+                if (terms[0].Contains('_'))
+                {
+                    MissingNumberIn1stTerm(terms);
+                }
 
-            else if (terms[1].Contains('_'))
-            {
-                MissingNumberIn2ndTerm(terms);
-            }
+                else if (terms[1].Contains('_'))
+                {
+                    MissingNumberIn2ndTerm(terms);
+                }
 
-            else if (terms[2].Contains('_'))
+                else if (terms[2].Contains('_'))
+                {
+                    MissingNumberIn3rdTerm(terms);
+                }
+            }
+            catch (Exception e)
             {
-                MissingNumberIn3rdTerm(terms);
+                Console.WriteLine(e.Message);
             }
         }
         static void MissingNumberIn2ndTerm(string[] terms)
@@ -35,7 +42,6 @@ namespace Calculator
 
         private static void PrintMissingNumber(string answer, string term)
         {
-
             int pos = term.IndexOf('_');
             term.Replace('_', answer[pos]);
             if (term == answer)
