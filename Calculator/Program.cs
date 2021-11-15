@@ -6,71 +6,93 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            string equation = "_51*10=4500";
+            Test("42*47=1_74", 9);
+            Test("4_*47=1974", 2);
+            Test("42*_7=1974", 4);
+            Test("42*_47=1974", -1);
+            Test("4_*46=1974", -1);
+            Test("2*12_=247", -1);
+        }
+        static void Test(string equation, int expectedAnswer)
+        {
+            int calculatedAnswer = FindMissingNumber(equation);
+            string passOrFails = calculatedAnswer == expectedAnswer ? "PASS" : "FAIL";
+            Console.WriteLine(equation + " " + passOrFails+" calculated answer was " + calculatedAnswer.ToString());
+        }
+        static int FindMissingNumber(string equation)
+        {
             try
             {
                 var terms = equation.Split(new Char[] { '*', '=' });
+                int result = -1;
                 if (terms[0].Contains('_'))
                 {
-                    MissingNumberIn1stTerm(terms);
+                    result = FindMissingNumberIn1stTerm(terms);
                 }
 
                 else if (terms[1].Contains('_'))
                 {
-                    MissingNumberIn2ndTerm(terms);
+                    result = FindMissingNumberIn2ndTerm(terms);
                 }
 
                 else if (terms[2].Contains('_'))
                 {
-                    MissingNumberIn3rdTerm(terms);
+                    result = FindMissingNumberIn3rdTerm(terms);
                 }
+                return result;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return -1;
             }
         }
-        static void MissingNumberIn2ndTerm(string[] terms)
+        static int FindMissingNumberIn2ndTerm(string[] terms)
         {
 
             int firstNumber = int.Parse(terms[0]);
             int thirdNumber = int.Parse(terms[2]);
-            int secondNumber = thirdNumber / firstNumber;
-            Console.WriteLine(secondNumber);
-            PrintMissingNumber(secondNumber.ToString(), terms[1]);
+            int missingNumber = -1;
+            if (thirdNumber % firstNumber == 0 )
+            {
+                int secondNumber = thirdNumber / firstNumber;
+                missingNumber = CompareAndReturnMissingNumber(secondNumber.ToString(), terms[1]); 
+            }
+            return missingNumber;
         }
-
-        private static void PrintMissingNumber(string answer, string term)
+        private static int CompareAndReturnMissingNumber(string answer, string term)
         {
             int pos = term.IndexOf('_');
-            term.Replace('_', answer[pos]);
+            term=term.Replace('_', answer[pos]);
             if (term == answer)
             {
-                Console.WriteLine("Missing digit is " + answer[pos]);
+                return int.Parse(answer[pos].ToString());
             }
             else
             {
-                Console.WriteLine("No Solution");
+                return -1;
             }
         }
-
-        static void MissingNumberIn1stTerm(string[] terms)
+        static int FindMissingNumberIn1stTerm(string[] terms)
         {
 
             int secondNumber = int.Parse(terms[1]);
             int thirdNumber = int.Parse(terms[2]);
-            int firstNumber = thirdNumber / secondNumber;
-            Console.WriteLine(firstNumber);
-            PrintMissingNumber(firstNumber.ToString(), terms[0]);
+            int missingNumber = -1;
+            if (thirdNumber % secondNumber == 0)
+            {
+                int firstNumber = thirdNumber / secondNumber;
+                missingNumber = CompareAndReturnMissingNumber(firstNumber.ToString(), terms[0]);
+            }
+            return missingNumber;
         }
-        static void MissingNumberIn3rdTerm(string[] terms)
+        static int FindMissingNumberIn3rdTerm(string[] terms)
         {
 
             int secondNumber = int.Parse(terms[1]);
             int firstNumber = int.Parse(terms[0]);
             int thirdNumber = firstNumber * secondNumber;
-            Console.WriteLine(thirdNumber);
-            PrintMissingNumber(thirdNumber.ToString(), terms[2]);
+            return CompareAndReturnMissingNumber(thirdNumber.ToString(), terms[2]);
         }
     }
 }
