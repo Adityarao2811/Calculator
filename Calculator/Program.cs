@@ -58,10 +58,10 @@ namespace Calculator
         private static int PrintMissingNumber(string answer, string term)
         {
             int pos = term.IndexOf('_');
-            term.Replace('_', answer[pos]);
+            term=term.Replace('_', answer[pos]);
             if (term == answer)
             {
-                return answer[pos];
+                return int.Parse(answer[pos].ToString());
             }
             else
             {
