@@ -27,17 +27,17 @@ namespace Calculator
                 int result = -1;
                 if (terms[0].Contains('_'))
                 {
-                    result = MissingNumberIn1stTerm(terms);
+                    result = FindMissingNumberIn1stTerm(terms);
                 }
 
                 else if (terms[1].Contains('_'))
                 {
-                    result = MissingNumberIn2ndTerm(terms);
+                    result = FindMissingNumberIn2ndTerm(terms);
                 }
 
                 else if (terms[2].Contains('_'))
                 {
-                    result = MissingNumberIn3rdTerm(terms);
+                    result = FindMissingNumberIn3rdTerm(terms);
                 }
                 return result;
             }
@@ -47,7 +47,7 @@ namespace Calculator
                 return -1;
             }
         }
-        static int MissingNumberIn2ndTerm(string[] terms)
+        static int FindMissingNumberIn2ndTerm(string[] terms)
         {
 
             int firstNumber = int.Parse(terms[0]);
@@ -60,7 +60,6 @@ namespace Calculator
             }
             return missingNumber;
         }
-
         private static int CompareAndReturnMissingNumber(string answer, string term)
         {
             int pos = term.IndexOf('_');
@@ -74,8 +73,7 @@ namespace Calculator
                 return -1;
             }
         }
-
-        static int MissingNumberIn1stTerm(string[] terms)
+        static int FindMissingNumberIn1stTerm(string[] terms)
         {
 
             int secondNumber = int.Parse(terms[1]);
@@ -88,7 +86,7 @@ namespace Calculator
             }
             return missingNumber;
         }
-        static int MissingNumberIn3rdTerm(string[] terms)
+        static int FindMissingNumberIn3rdTerm(string[] terms)
         {
 
             int secondNumber = int.Parse(terms[1]);
